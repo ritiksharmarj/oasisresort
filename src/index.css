@@ -1,0 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Indigo */
+    --color-brand-50: 238 242 255;
+    --color-brand-100: 224 231 255;
+    --color-brand-200: 199 210 254;
+    --color-brand-500: 99 102 241;
+    --color-brand-600: 79 70 229;
+    --color-brand-700: 67 56 202;
+    --color-brand-800: 55 48 163;
+    --color-brand-900: 49 46 129;
+
+    /* Grey */
+    --color-grey-0: 255 255 255;
+    --color-grey-50: 249 250 251;
+    --color-grey-100: 243 244 246;
+    --color-grey-200: 229 231 235;
+    --color-grey-300: 209 213 219;
+    --color-grey-400: 156 163 175;
+    --color-grey-500: 107 114 128;
+    --color-grey-600: 75 85 99;
+    --color-grey-700: 55 65 81;
+    --color-grey-800: 31 41 55;
+    --color-grey-900: 17 24 39;
+
+    --color-blue-100: 224 242 254;
+    --color-blue-700: 3 105 161;
+    --color-green-100: 220 252 231;
+    --color-green-700: 21 128 61;
+    --color-yellow-100: 254 249 195;
+    --color-yellow-700: 161 98 7;
+    --color-silver-100: 229 231 235;
+    --color-silver-700: 55 65 81;
+    --color-indigo-100: 224 231 255;
+    --color-indigo-700: 67 56 202;
+
+    --color-red-100: 254 226 226;
+    --color-red-700: 185 28 28;
+    --color-red-800: 153 27 27;
+
+    --backdrop-color: 255 255 255 0.1;
+  }
+
+  /* @media (prefers-color-scheme: dark) {
+    :root {
+    }
+  } */
+
+  body {
+    @apply min-h-screen text-base text-grey-700 transition;
+    font-family:
+      'Inter',
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      'Segoe UI',
+      Roboto,
+      Oxygen,
+      Ubuntu,
+      Cantarell,
+      'Open Sans',
+      'Helvetica Neue',
+      sans-serif;
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply transition;
+  }
+
+  *:disabled {
+    @apply cursor-not-allowed;
+  }
+
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply hyphens-auto break-words;
+  }
+
+  img {
+    @apply max-w-full;
+  }
+}
+
+@layer utilities {
+  .main-nav__link a.active {
+    @apply bg-grey-100 text-grey-800;
+  }
+
+  .main-nav__link a.active svg {
+    @apply text-brand-600;
+  }
+}
