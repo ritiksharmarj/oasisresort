@@ -51,7 +51,7 @@
   } */
 
   body {
-    @apply min-h-screen text-base text-grey-700 transition;
+    @apply min-h-screen text-base text-grey-700 transition-all;
     font-family:
       'Inter',
       system-ui,
@@ -65,16 +65,6 @@
       'Open Sans',
       'Helvetica Neue',
       sans-serif;
-  }
-
-  *,
-  *::before,
-  *::after {
-    @apply transition;
-  }
-
-  *:disabled {
-    @apply cursor-not-allowed;
   }
 
   p,
