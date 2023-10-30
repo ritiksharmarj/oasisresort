@@ -7,8 +7,19 @@ module.exports = {
     'plugin:react/jsx-runtime',
     'plugin:react-hooks/recommended',
   ],
+  parser: '@babel/eslint-parser',
   ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  parserOptions: {
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    requireConfigFile: false,
+    babelOptions: {
+      babelrc: false,
+      configFile: false,
+      // your babel options
+      presets: ['@babel/preset-react'],
+    },
+  },
   settings: { react: { version: '18.2' } },
   plugins: ['react-refresh'],
   rules: {
@@ -16,5 +27,6 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'react/prop-types': 0,
   },
-}
+};

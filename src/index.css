@@ -97,6 +97,10 @@
     @apply bg-grey-100 text-grey-800;
   }
 
+  .main-nav__link svg {
+    @apply h-6 w-6 text-grey-400 transition group-hover:text-brand-600;
+  }
+
   .main-nav__link a.active svg {
     @apply text-brand-600;
   }
