@@ -9,7 +9,9 @@ function AppLayout() {
       <Sidebar />
 
       <main className="bg-grey-50 p-10">
-        <Outlet />
+        <div className="mx-auto max-w-7xl">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

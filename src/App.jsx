@@ -1,6 +1,7 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { Toaster } from 'react-hot-toast';
 
 import Dashboard from './pages/Dashboard';
 import Bookings from './pages/Bookings';
@@ -16,7 +17,7 @@ import AppLayout from './ui/AppLayout';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 60 * 1000,
+      staleTime: 0,
     },
   },
 });
@@ -41,6 +42,20 @@ function App() {
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
+      <Toaster
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 3000,
+          },
+          style: {
+            backgroundColor: 'rgb(var(--color-grey-0))',
+            color: 'rgb(var(--color-grey-700))',
+          },
+        }}
+      />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );
