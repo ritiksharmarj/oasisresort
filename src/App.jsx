@@ -48,11 +48,11 @@ function App() {
             duration: 3000,
           },
           error: {
-            duration: 3000,
+            duration: 5000,
           },
           style: {
-            backgroundColor: 'rgb(var(--color-grey-0))',
-            color: 'rgb(var(--color-grey-700))',
+            backgroundColor: 'rgb(var(--color-gray-0))',
+            color: 'rgb(var(--color-gray-700))',
           },
         }}
       />

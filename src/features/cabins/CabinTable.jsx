@@ -18,9 +18,9 @@ function CabinTable() {
 
   return (
     <div className="relative overflow-x-auto">
-      <div className="min-w-full overflow-hidden rounded-md border border-grey-200 shadow-sm">
-        <table className="min-w-full divide-y divide-grey-100 bg-grey-0 text-left text-sm font-medium">
-          <thead className="bg-grey-100 uppercase text-grey-600">
+      <div className="border-gray-200 min-w-full overflow-hidden rounded-md border shadow-sm">
+        <table className="divide-gray-100 bg-gray-0 min-w-full divide-y text-left text-sm font-medium">
+          <thead className="bg-gray-100 text-gray-600 uppercase">
             <tr>
               <th scope="col" className="px-6 py-4 font-semibold">
                 Cabin Image
@@ -41,7 +41,7 @@ function CabinTable() {
             </tr>
           </thead>
 
-          <tbody className="divide-y divide-grey-100">
+          <tbody className="divide-gray-100 divide-y">
             {cabins.map((cabin) => (
               <CabinRow cabin={cabin} key={cabin.id} />
             ))}

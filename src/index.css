@@ -14,18 +14,18 @@
     --color-brand-800: 55 48 163;
     --color-brand-900: 49 46 129;
 
-    /* Grey */
-    --color-grey-0: 255 255 255;
-    --color-grey-50: 249 250 251;
-    --color-grey-100: 243 244 246;
-    --color-grey-200: 229 231 235;
-    --color-grey-300: 209 213 219;
-    --color-grey-400: 156 163 175;
-    --color-grey-500: 107 114 128;
-    --color-grey-600: 75 85 99;
-    --color-grey-700: 55 65 81;
-    --color-grey-800: 31 41 55;
-    --color-grey-900: 17 24 39;
+    /* gray */
+    --color-gray-0: 255 255 255;
+    --color-gray-50: 249 250 251;
+    --color-gray-100: 243 244 246;
+    --color-gray-200: 229 231 235;
+    --color-gray-300: 209 213 219;
+    --color-gray-400: 156 163 175;
+    --color-gray-500: 107 114 128;
+    --color-gray-600: 75 85 99;
+    --color-gray-700: 55 65 81;
+    --color-gray-800: 31 41 55;
+    --color-gray-900: 17 24 39;
 
     --color-blue-100: 224 242 254;
     --color-blue-700: 3 105 161;
@@ -51,7 +51,7 @@
   } */
 
   body {
-    @apply min-h-screen text-base text-grey-700 transition-all;
+    @apply text-gray-700 min-h-screen text-base transition-all;
     font-family:
       'Inter',
       system-ui,
@@ -84,11 +84,11 @@
 
 @layer utilities {
   .main-nav__link a.active {
-    @apply bg-grey-100 text-grey-800;
+    @apply bg-gray-100 text-gray-800;
   }
 
   .main-nav__link svg {
-    @apply h-6 w-6 text-grey-400 transition group-hover:text-brand-600;
+    @apply text-gray-400 h-6 w-6 transition group-hover:text-brand-600;
   }
 
   .main-nav__link a.active svg {

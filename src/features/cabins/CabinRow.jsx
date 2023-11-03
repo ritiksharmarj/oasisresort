@@ -7,11 +7,11 @@ import toast from 'react-hot-toast';
 function CabinRow({ cabin }) {
   const {
     id: cabinId,
-    name,
+    cabinName,
     maxCapacity,
     regularPrice,
     discount,
-    image,
+    cabinImage,
   } = cabin;
 
   const queryClient = useQueryClient();
@@ -33,13 +33,13 @@ function CabinRow({ cabin }) {
     <tr>
       <td className="whitespace-nowrap px-6 py-2">
         <img
-          src={image}
-          alt={`Cabin ${name}`}
+          src={cabinImage}
+          alt={`Cabin ${cabinName}`}
           className="h-16 w-28 rounded-md object-cover"
         />
       </td>
       <td className="whitespace-nowrap px-6 py-2 font-semibold">
-        <span>{name}</span>
+        <span>{cabinName}</span>
       </td>
       <td className="whitespace-nowrap px-6 py-2">
         <span>Fits up to {maxCapacity} guests</span>
