@@ -4,7 +4,13 @@ import { createNewCabin } from '../../services/apiCabins';
 import toast from 'react-hot-toast';
 
 function CreateCabinForm() {
-  const { register, handleSubmit, reset } = useForm();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    getValues,
+    formState: { errors },
+  } = useForm();
 
   const queryClient = useQueryClient();
 
@@ -25,7 +31,7 @@ function CreateCabinForm() {
   });
 
   function onSubmit(data) {
-    mutate(data);
+    mutate({ ...data, cabinImage: data.cabinImage[0] });
   }
 
   return (
@@ -44,12 +50,18 @@ function CreateCabinForm() {
           <div className="mt-2">
             <input
               type="text"
-              {...register('cabinName')}
-              name="cabinName"
               id="cabinName"
+              {...register('cabinName', {
+                required: 'Name cannot be kept empty',
+              })}
               className="block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600"
             />
           </div>
+          {errors.cabinName && (
+            <p className="mt-2 text-sm text-red-700">
+              {errors.cabinName.message}
+            </p>
+          )}
         </div>
 
         <div>
@@ -62,12 +74,22 @@ function CreateCabinForm() {
           <div className="mt-2">
             <input
               type="number"
-              {...register('maxCapacity')}
-              name="maxCapacity"
               id="maxCapacity"
+              {...register('maxCapacity', {
+                required: 'Capacity cannot be kept empty',
+                min: {
+                  value: 1,
+                  message: 'Capacity should be at least one',
+                },
+              })}
               className="block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600"
             />
           </div>
+          {errors.maxCapacity && (
+            <p className="mt-2 text-sm text-red-700">
+              {errors.maxCapacity.message}
+            </p>
+          )}
         </div>
 
         <div>
@@ -80,12 +102,22 @@ function CreateCabinForm() {
           <div className="mt-2">
             <input
               type="number"
-              {...register('regularPrice')}
-              name="regularPrice"
               id="regularPrice"
+              {...register('regularPrice', {
+                required: 'Price cannot be kept empty',
+                min: {
+                  value: 1,
+                  message: 'Price should be at least one',
+                },
+              })}
               className="block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600"
             />
           </div>
+          {errors.regularPrice && (
+            <p className="mt-2 text-sm text-red-700">
+              {errors.regularPrice.message}
+            </p>
+          )}
         </div>
 
         <div>
@@ -98,12 +130,21 @@ function CreateCabinForm() {
           <div className="mt-2">
             <input
               type="number"
-              {...register('discount')}
-              name="discount"
               id="discount"
+              {...register('discount', {
+                required: 'Discount cannot be kept empty',
+                validate: (value) =>
+                  +value <= +getValues().regularPrice ||
+                  'Discount should be less than regular price',
+              })}
               className="block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600"
             />
           </div>
+          {errors.discount && (
+            <p className="mt-2 text-sm text-red-700">
+              {errors.discount.message}
+            </p>
+          )}
         </div>
 
         <div className="col-span-2">
@@ -115,13 +156,19 @@ function CreateCabinForm() {
           </label>
           <div className="mt-2">
             <textarea
-              {...register('description')}
-              name="description"
               id="description"
               rows={3}
+              {...register('description', {
+                required: 'Description cannot be kept empty',
+              })}
               className="block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600"
             />
           </div>
+          {errors.description && (
+            <p className="mt-2 text-sm text-red-700">
+              {errors.description.message}
+            </p>
+          )}
         </div>
 
         <div className="col-span-2 flex items-center gap-x-12">
@@ -134,11 +181,17 @@ function CreateCabinForm() {
           <div>
             <input
               type="file"
-              name="cabinImage"
               id="cabinImage"
+              accept=".jpg, .jpeg, .png"
+              {...register('cabinImage', {
+                required: 'Image cannot be kept empty',
+              })}
               className="block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-brand-600 file:px-4 file:py-2 file:text-sm file:font-medium file:text-brand-50 hover:file:bg-brand-700 focus:outline-0"
             />
           </div>
+          {errors.cabinImage && (
+            <p className="text-sm text-red-700">{errors.cabinImage.message}</p>
+          )}
         </div>
       </div>
 
@@ -154,7 +207,7 @@ function CreateCabinForm() {
           disabled={isCreating}
           className="rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-brand-50 shadow-sm hover:bg-brand-700"
         >
-          Save
+          Upload
         </button>
       </div>
     </form>
