@@ -6,10 +6,12 @@ function NavItem({ to, icon, label }) {
     <li className="main-nav__link">
       <NavLink
         to={to}
-        className="fill-gray-400 text-gray-600 hover:bg-gray-100 group flex items-center gap-3 rounded-sm px-6 py-3 text-base font-medium transition"
+        className="group flex items-center gap-3 rounded-sm px-6 py-3 text-base font-medium text-gray-600 transition-all hover:bg-gray-100"
       >
         {icon}
-        <span className="group-hover:text-gray-800 transition">{label}</span>
+        <span className="transition-all group-hover:text-gray-800">
+          {label}
+        </span>
       </NavLink>
     </li>
   );

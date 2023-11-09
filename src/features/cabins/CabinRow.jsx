@@ -1,10 +1,15 @@
-import { Trash } from '@phosphor-icons/react';
+import { PencilLine, Trash } from '@phosphor-icons/react';
 import { formatCurrency } from '../../utils/helpers';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteCabin } from '../../services/apiCabins';
 import toast from 'react-hot-toast';
+import { useState } from 'react';
+
+import CreateCabinForm from './CreateCabinForm';
 
 function CabinRow({ cabin }) {
+  const [showForm, setShowForm] = useState(false);
+
   const {
     id: cabinId,
     cabinName,
@@ -30,33 +35,41 @@ function CabinRow({ cabin }) {
   });
 
   return (
-    <tr>
-      <td className="whitespace-nowrap px-6 py-2">
-        <img
-          src={cabinImage}
-          alt={`Cabin ${cabinName}`}
-          className="h-16 w-28 rounded-md object-cover"
-        />
-      </td>
-      <td className="whitespace-nowrap px-6 py-2 font-semibold">
-        <span>{cabinName}</span>
-      </td>
-      <td className="whitespace-nowrap px-6 py-2">
-        <span>Fits up to {maxCapacity} guests</span>
-      </td>
-      <td className="whitespace-nowrap px-6 py-2 font-semibold">
-        <span>{formatCurrency(regularPrice)}</span>
-      </td>
-      <td className="whitespace-nowrap px-6 py-2">
-        <span className="text-green-700">{formatCurrency(discount)}</span>
-      </td>
+    <>
+      <tr>
+        <td className="whitespace-nowrap px-6 py-2">
+          <img
+            src={cabinImage}
+            alt={`Cabin ${cabinName}`}
+            className="h-16 w-28 rounded-md object-cover"
+          />
+        </td>
+        <td className="whitespace-nowrap px-6 py-2 font-semibold">
+          <span>{cabinName}</span>
+        </td>
+        <td className="whitespace-nowrap px-6 py-2">
+          <span>Fits up to {maxCapacity} guests</span>
+        </td>
+        <td className="whitespace-nowrap px-6 py-2 font-semibold">
+          <span>{formatCurrency(regularPrice)}</span>
+        </td>
+        <td className="whitespace-nowrap px-6 py-2">
+          <span className="text-green-700">{formatCurrency(discount)}</span>
+        </td>
 
-      <td>
-        <button onClick={() => mutate(cabinId)} disabled={isDeleting}>
-          <Trash size={20} />
-        </button>
-      </td>
-    </tr>
+        <td>
+          <button onClick={() => setShowForm((show) => !show)}>
+            <PencilLine size={20} alt="Edit this cabin" />
+          </button>
+
+          <button onClick={() => mutate(cabinId)} disabled={isDeleting}>
+            <Trash size={20} alt="Delete this cabin" />
+          </button>
+        </td>
+      </tr>
+
+      {showForm && <CreateCabinForm editCabinProps={cabin} />}
+    </>
   );
 }
 

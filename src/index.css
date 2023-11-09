@@ -51,7 +51,7 @@
   } */
 
   body {
-    @apply text-gray-700 min-h-screen text-base transition-all;
+    @apply min-h-screen text-base text-gray-700 transition-all;
     font-family:
       'Inter',
       system-ui,
@@ -80,6 +80,20 @@
   img {
     @apply max-w-full;
   }
+
+  label {
+    @apply block text-sm font-medium leading-6;
+  }
+
+  input[type='text'],
+  input[type='number'],
+  textarea {
+    @apply block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600;
+  }
+
+  input[type='file'] {
+    @apply block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-brand-600 file:px-4 file:py-2 file:text-sm file:font-medium file:text-brand-50 hover:file:bg-brand-700 focus:outline-0;
+  }
 }
 
 @layer utilities {
@@ -88,7 +102,11 @@
   }
 
   .main-nav__link svg {
-    @apply text-gray-400 h-6 w-6 transition group-hover:text-brand-600;
+    @apply h-6 w-6 text-gray-400 transition-all group-hover:text-brand-600;
+  }
+
+  .main-nav__link a:hover svg {
+    @apply text-brand-600;
   }
 
   .main-nav__link a.active svg {

@@ -1,22 +1,32 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useForm } from 'react-hook-form';
-import { createNewCabin } from '../../services/apiCabins';
+import { createEditCabin } from '../../services/apiCabins';
 import toast from 'react-hot-toast';
 
-function CreateCabinForm() {
+function CreateCabinForm({ editCabinProps = {} }) {
+  const { id: editCabinId, ...editCabinValues } = editCabinProps;
+
+  // If we click on edit cabin then this will become true
+  const isEditCabinSession = Boolean(editCabinId);
+
   const {
     register,
     handleSubmit,
     reset,
     getValues,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: isEditCabinSession ? editCabinValues : {},
+  });
 
   const queryClient = useQueryClient();
 
-  // When this mutation succeeds, invalidate any queries with the "cabins" query key
-  const { mutate, isPending: isCreating } = useMutation({
-    mutationFn: (data) => createNewCabin(data),
+  /**
+   * Create a cabin
+   * When this mutation succeeds, invalidate any queries with the "cabins" query key
+   */
+  const { mutate: createCabin, isPending: isCreating } = useMutation({
+    mutationFn: (data) => createEditCabin(data),
     onSuccess: () => {
       toast.success('Cabin successfully created.');
 
@@ -30,23 +40,46 @@ function CreateCabinForm() {
     onError: (err) => toast.error(err.message),
   });
 
+  /**
+   * Edit a cabin
+   * When this mutation succeeds, invalidate any queries with the "cabins" query key
+   */
+  const { mutate: editCabin, isPending: isEditing } = useMutation({
+    mutationFn: ({ data, id }) => createEditCabin(data, id),
+    onSuccess: () => {
+      toast.success('Cabin successfully edited.');
+
+      queryClient.invalidateQueries({
+        queryKey: ['cabins'],
+      });
+
+      // Reset the form
+      reset();
+    },
+    onError: (err) => toast.error(err.message),
+  });
+
+  const isWorking = isCreating || isEditing;
+
   function onSubmit(data) {
-    mutate({ ...data, cabinImage: data.cabinImage[0] });
+    const image =
+      typeof data.cabinImage === 'string'
+        ? data.cabinImage
+        : data.cabinImage[0];
+
+    if (isEditCabinSession)
+      editCabin({ data: { ...data, cabinImage: image }, id: editCabinId });
+    else createCabin({ ...data, cabinImage: image });
   }
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={`${isCreating && 'opacity-50'}`}
+      className={`${isWorking && 'opacity-50'}`}
     >
       <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-b border-gray-900/10 pb-6">
         <div>
-          <label
-            htmlFor="cabinName"
-            className="block text-sm font-medium leading-6"
-          >
-            Cabin name
-          </label>
+          <label htmlFor="cabinName">Cabin name</label>
           <div className="mt-2">
             <input
               type="text"
@@ -54,7 +87,6 @@ function CreateCabinForm() {
               {...register('cabinName', {
                 required: 'Name cannot be kept empty',
               })}
-              className="block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600"
             />
           </div>
           {errors.cabinName && (
@@ -65,12 +97,7 @@ function CreateCabinForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="maxCapacity"
-            className="block text-sm font-medium leading-6"
-          >
-            Maximum capacity
-          </label>
+          <label htmlFor="maxCapacity">Maximum capacity</label>
           <div className="mt-2">
             <input
               type="number"
@@ -82,7 +109,6 @@ function CreateCabinForm() {
                   message: 'Capacity should be at least one',
                 },
               })}
-              className="block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600"
             />
           </div>
           {errors.maxCapacity && (
@@ -93,12 +119,7 @@ function CreateCabinForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="regularPrice"
-            className="block text-sm font-medium leading-6"
-          >
-            Regular price
-          </label>
+          <label htmlFor="regularPrice">Regular price</label>
           <div className="mt-2">
             <input
               type="number"
@@ -110,7 +131,6 @@ function CreateCabinForm() {
                   message: 'Price should be at least one',
                 },
               })}
-              className="block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600"
             />
           </div>
           {errors.regularPrice && (
@@ -121,12 +141,7 @@ function CreateCabinForm() {
         </div>
 
         <div>
-          <label
-            htmlFor="discount"
-            className="block text-sm font-medium leading-6"
-          >
-            Discount
-          </label>
+          <label htmlFor="discount">Discount</label>
           <div className="mt-2">
             <input
               type="number"
@@ -137,7 +152,6 @@ function CreateCabinForm() {
                   +value <= +getValues().regularPrice ||
                   'Discount should be less than regular price',
               })}
-              className="block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600"
             />
           </div>
           {errors.discount && (
@@ -148,12 +162,7 @@ function CreateCabinForm() {
         </div>
 
         <div className="col-span-2">
-          <label
-            htmlFor="description"
-            className="block text-sm font-medium leading-6"
-          >
-            Description for website
-          </label>
+          <label htmlFor="description">Description for website</label>
           <div className="mt-2">
             <textarea
               id="description"
@@ -161,7 +170,6 @@ function CreateCabinForm() {
               {...register('description', {
                 required: 'Description cannot be kept empty',
               })}
-              className="block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600"
             />
           </div>
           {errors.description && (
@@ -172,21 +180,19 @@ function CreateCabinForm() {
         </div>
 
         <div className="col-span-2 flex items-center gap-x-12">
-          <label
-            htmlFor="cabinImage"
-            className="block text-sm font-medium leading-6"
-          >
-            Cabin image
-          </label>
+          <label htmlFor="cabinImage">Cabin image</label>
           <div>
             <input
               type="file"
               id="cabinImage"
               accept=".jpg, .jpeg, .png"
               {...register('cabinImage', {
-                required: 'Image cannot be kept empty',
+                validate: (fileData) => {
+                  if (typeof fileData === 'string' || fileData.length > 0)
+                    return true;
+                  return 'Image cannot be kept empty';
+                },
               })}
-              className="block w-full text-sm file:mr-4 file:rounded-md file:border-0 file:bg-brand-600 file:px-4 file:py-2 file:text-sm file:font-medium file:text-brand-50 hover:file:bg-brand-700 focus:outline-0"
             />
           </div>
           {errors.cabinImage && (
@@ -204,10 +210,10 @@ function CreateCabinForm() {
         </button>
         <button
           type="submit"
-          disabled={isCreating}
+          disabled={isWorking}
           className="rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-brand-50 shadow-sm hover:bg-brand-700"
         >
-          Upload
+          {isEditCabinSession ? 'Save cabin' : 'Upload cabin'}
         </button>
       </div>
     </form>
