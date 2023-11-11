@@ -1,14 +1,13 @@
+import { useState } from 'react';
+import { useDeleteCabin } from './hooks/useDeleteCabin';
 import { PencilLine, Trash } from '@phosphor-icons/react';
 import { formatCurrency } from '../../utils/helpers';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteCabin } from '../../services/apiCabins';
-import toast from 'react-hot-toast';
-import { useState } from 'react';
 
 import CreateCabinForm from './CreateCabinForm';
 
 function CabinRow({ cabin }) {
   const [showForm, setShowForm] = useState(false);
+  const { deleteCabin, isDeleting } = useDeleteCabin();
 
   const {
     id: cabinId,
@@ -18,21 +17,6 @@ function CabinRow({ cabin }) {
     discount,
     cabinImage,
   } = cabin;
-
-  const queryClient = useQueryClient();
-
-  // When this mutation succeeds, invalidate any queries with the "cabins" query key
-  const { mutate, isPending: isDeleting } = useMutation({
-    mutationFn: (cabinId) => deleteCabin(cabinId),
-    onSuccess: () => {
-      toast.success('Cabin successfully deleted.');
-
-      queryClient.invalidateQueries({
-        queryKey: ['cabins'],
-      });
-    },
-    onError: (err) => toast.error(err.message),
-  });
 
   return (
     <>
@@ -54,7 +38,11 @@ function CabinRow({ cabin }) {
           <span>{formatCurrency(regularPrice)}</span>
         </td>
         <td className="whitespace-nowrap px-6 py-2">
-          <span className="text-green-700">{formatCurrency(discount)}</span>
+          {discount ? (
+            <span className="text-green-700">{formatCurrency(discount)}</span>
+          ) : (
+            <span>&mdash;</span>
+          )}
         </td>
 
         <td>
@@ -62,7 +50,7 @@ function CabinRow({ cabin }) {
             <PencilLine size={20} alt="Edit this cabin" />
           </button>
 
-          <button onClick={() => mutate(cabinId)} disabled={isDeleting}>
+          <button onClick={() => deleteCabin(cabinId)} disabled={isDeleting}>
             <Trash size={20} alt="Delete this cabin" />
           </button>
         </td>

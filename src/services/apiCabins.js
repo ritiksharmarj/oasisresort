@@ -12,6 +12,7 @@ export async function getCabins() {
 }
 
 export async function createEditCabin(newCabinData, editCabinId) {
+  // If there is already a image in supabase storage
   const hasImagePath = newCabinData.cabinImage?.startsWith?.(
     import.meta.env.VITE_SUPABASE_URL,
   );

@@ -6,7 +6,7 @@ function NavItem({ to, icon, label }) {
     <li className="main-nav__link">
       <NavLink
         to={to}
-        className="group flex items-center gap-3 rounded-sm px-6 py-3 text-base font-medium text-gray-600 transition-all hover:bg-gray-100"
+        className="group flex items-center gap-3 rounded-md px-6 py-3 text-base font-medium text-gray-600 transition-all hover:bg-gray-100"
       >
         {icon}
         <span className="transition-all group-hover:text-gray-800">
