@@ -1,13 +1,14 @@
 import { useState } from 'react';
+import { Copy, PencilLine, Trash } from '@phosphor-icons/react';
 import { useDeleteCabin } from './hooks/useDeleteCabin';
-import { PencilLine, Trash } from '@phosphor-icons/react';
+import { useCreateCabin } from './hooks/useCreateCabin';
 import { formatCurrency } from '../../utils/helpers';
-
 import CreateCabinForm from './CreateCabinForm';
 
 function CabinRow({ cabin }) {
   const [showForm, setShowForm] = useState(false);
   const { deleteCabin, isDeleting } = useDeleteCabin();
+  const { createCabin, isCreating } = useCreateCabin();
 
   const {
     id: cabinId,
@@ -16,7 +17,19 @@ function CabinRow({ cabin }) {
     regularPrice,
     discount,
     cabinImage,
+    description,
   } = cabin;
+
+  function handleDuplicate() {
+    createCabin({
+      cabinName: `Copy of ${cabinName}`,
+      maxCapacity,
+      regularPrice,
+      discount,
+      cabinImage,
+      description,
+    });
+  }
 
   return (
     <>
@@ -46,6 +59,10 @@ function CabinRow({ cabin }) {
         </td>
 
         <td>
+          <button onClick={handleDuplicate} disabled={isCreating}>
+            <Copy size={20} alt="Duplicate this cabin" />
+          </button>
+
           <button onClick={() => setShowForm((show) => !show)}>
             <PencilLine size={20} alt="Edit this cabin" />
           </button>
