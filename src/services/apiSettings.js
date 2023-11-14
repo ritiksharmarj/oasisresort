@@ -10,3 +10,17 @@ export async function getSettings() {
 
   return data;
 }
+
+export async function updateSetting(newSettingData) {
+  const { data, error } = await supabase
+    .from('settings')
+    .update(newSettingData)
+    .eq('id', 1)
+    .single();
+
+  if (error) {
+    throw new Error('We are unable to update settings at this time.');
+  }
+
+  return data;
+}

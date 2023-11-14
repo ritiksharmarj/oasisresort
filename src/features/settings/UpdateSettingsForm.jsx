@@ -1,22 +1,26 @@
-import { useForm } from 'react-hook-form';
-import { useSettings } from './hooks/useSettings';
-import { Spinner } from '../../ui/Spinner';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { useSettings } from './hooks/useSettings';
+import { useUpdateSetting } from './hooks/useUpdateSetting';
+import { Spinner } from '../../ui/Spinner';
 
 function UpdateSettingsForm() {
   const [btnDisable, setBtnDisable] = useState(true);
 
   const { isLoading, settings = {} } = useSettings();
+  const { isUpdating, updateSetting } = useUpdateSetting();
 
   const {
     handleSubmit,
     register,
     getValues,
-    setValue,
+    reset,
     formState: { errors },
   } = useForm();
 
   function handleValidate() {
+    // It returns true if there is at least one field passes the condition
     const isAnyFieldDifferent = Object.entries(getValues()).some(
       ([field, value]) => settings[field] !== Number(value),
     );
@@ -25,15 +29,20 @@ function UpdateSettingsForm() {
   }
 
   function handleResetForm() {
-    Object.entries(getValues()).forEach((field) => {
-      setValue(field[0], settings[field[0]]);
+    reset({
+      minBookingLength: settings.minBookingLength,
+      maxBookingLength: settings.maxBookingLength,
+      maxGuestsPerBooking: settings.maxGuestsPerBooking,
+      breakfastPrice: settings.breakfastPrice,
     });
 
     handleValidate();
   }
 
   function onSubmit(data) {
-    console.log(data);
+    updateSetting(data, {
+      onSuccess: () => setBtnDisable(true),
+    });
   }
 
   if (isLoading) return <Spinner className="mx-auto h-6 w-6" />;
@@ -42,7 +51,7 @@ function UpdateSettingsForm() {
     <div className="rounded-md border border-gray-200 bg-gray-0 p-6 shadow-sm">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={`${isLoading && 'opacity-50'}`}
+        className={`${isUpdating && 'opacity-50'}`}
       >
         <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-b border-gray-900/10 pb-12">
           <div>
@@ -54,6 +63,10 @@ function UpdateSettingsForm() {
                 defaultValue={settings.minBookingLength}
                 {...register('minBookingLength', {
                   onChange: handleValidate,
+                  min: {
+                    value: 1,
+                    message: 'Should be greater than 0',
+                  },
                 })}
               />
             </div>
@@ -73,6 +86,10 @@ function UpdateSettingsForm() {
                 defaultValue={settings.maxBookingLength}
                 {...register('maxBookingLength', {
                   onChange: handleValidate,
+                  min: {
+                    value: 1,
+                    message: 'Should be greater than 0',
+                  },
                 })}
               />
             </div>
@@ -92,6 +109,10 @@ function UpdateSettingsForm() {
                 defaultValue={settings.maxGuestsPerBooking}
                 {...register('maxGuestsPerBooking', {
                   onChange: handleValidate,
+                  min: {
+                    value: 1,
+                    message: 'Should be greater than 0',
+                  },
                 })}
               />
             </div>
@@ -111,6 +132,10 @@ function UpdateSettingsForm() {
                 defaultValue={settings.breakfastPrice}
                 {...register('breakfastPrice', {
                   onChange: handleValidate,
+                  min: {
+                    value: 1,
+                    message: 'Should be greater than 0',
+                  },
                 })}
               />
             </div>
@@ -124,6 +149,7 @@ function UpdateSettingsForm() {
 
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
+            type="button"
             onClick={handleResetForm}
             className="text-sm font-medium leading-6 text-gray-600"
           >
