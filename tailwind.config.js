@@ -6,7 +6,7 @@ export default {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      'backdrop-color': 'rgba(var(--backdrop-color))',
+      'backdrop-color': 'rgb(var(--backdrop-color) / <alpha-value>)',
       brand: {
         50: 'rgb(var(--color-brand-50) / <alpha-value>)',
         100: 'rgb(var(--color-brand-100) / <alpha-value>)',

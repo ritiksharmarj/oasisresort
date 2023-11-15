@@ -42,7 +42,7 @@
     --color-red-700: 185 28 28;
     --color-red-800: 153 27 27;
 
-    --backdrop-color: 255 255 255 0.1;
+    --backdrop-color: 255 255 255;
   }
 
   /* @media (prefers-color-scheme: dark) {

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useCreateCabin } from './hooks/useCreateCabin';
 import { useEditCabin } from './hooks/useEditCabin';
 
-function CreateCabinForm({ editCabinProps = {} }) {
+function CreateCabinForm({ editCabinProps = {}, onCloseModal }) {
   const { createCabin, isCreating } = useCreateCabin();
   const { editCabin, isEditing } = useEditCabin();
   const isWorking = isCreating || isEditing;
@@ -31,14 +31,20 @@ function CreateCabinForm({ editCabinProps = {} }) {
       editCabin(
         { data: { ...data, cabinImage: image }, id: editCabinId },
         {
-          onSuccess: () => reset(),
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
         },
       );
     else
       createCabin(
         { ...data, cabinImage: image },
         {
-          onSuccess: () => reset(),
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
         },
       );
   }
@@ -175,6 +181,7 @@ function CreateCabinForm({ editCabinProps = {} }) {
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <button
           type="reset"
+          onClick={() => onCloseModal?.()}
           className="text-sm font-medium leading-6 text-gray-600"
         >
           Cancel
