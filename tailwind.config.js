@@ -52,6 +52,8 @@ export default {
       },
       red: {
         100: 'rgb(var(--color-red-100) / <alpha-value>)',
+        200: 'rgb(var(--color-red-200) / <alpha-value>)',
+        600: 'rgb(var(--color-red-600) / <alpha-value>)',
         700: 'rgb(var(--color-red-700) / <alpha-value>)',
         800: 'rgb(var(--color-red-800) / <alpha-value>)',
       },

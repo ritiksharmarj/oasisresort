@@ -150,15 +150,16 @@ function UpdateSettingsForm() {
         <div className="mt-6 flex items-center justify-end gap-x-6">
           <button
             type="button"
+            disabled={btnDisable}
             onClick={handleResetForm}
-            className="text-sm font-medium leading-6 text-gray-600"
+            className="text-sm font-medium text-gray-600"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={btnDisable}
-            className="rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-brand-50 shadow-sm hover:bg-brand-700 disabled:bg-brand-200"
+            className="rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-brand-50 shadow-sm transition-all hover:bg-brand-700 disabled:bg-brand-200"
           >
             Save changes
           </button>

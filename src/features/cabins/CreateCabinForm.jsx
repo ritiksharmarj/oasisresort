@@ -52,7 +52,7 @@ function CreateCabinForm({ editCabinProps = {}, onCloseModal }) {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className={`${isWorking && 'opacity-50'}`}
+      className={`${isWorking && 'opacity-50'} w-[750px]`}
     >
       <div className="grid grid-cols-2 gap-x-6 gap-y-8 border-b border-gray-900/10 pb-6">
         <div>
@@ -181,15 +181,16 @@ function CreateCabinForm({ editCabinProps = {}, onCloseModal }) {
       <div className="mt-6 flex items-center justify-end gap-x-6">
         <button
           type="reset"
+          disabled={isWorking}
           onClick={() => onCloseModal?.()}
-          className="text-sm font-medium leading-6 text-gray-600"
+          className="text-sm font-medium text-gray-600"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={isWorking}
-          className="rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-brand-50 shadow-sm hover:bg-brand-700"
+          className="rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-brand-50 shadow-sm transition-all hover:bg-brand-700 disabled:bg-brand-200"
         >
           {isEditCabinSession ? 'Save cabin' : 'Upload cabin'}
         </button>

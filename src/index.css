@@ -39,6 +39,8 @@
     --color-indigo-700: 67 56 202;
 
     --color-red-100: 254 226 226;
+    --color-red-200: 254 200 200;
+    --color-red-600: 219 41 41;
     --color-red-700: 185 28 28;
     --color-red-800: 153 27 27;
 
@@ -67,7 +69,6 @@
       sans-serif;
   }
 
-  p,
   h1,
   h2,
   h3,
