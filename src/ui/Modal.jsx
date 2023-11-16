@@ -5,37 +5,36 @@ import { X } from '@phosphor-icons/react';
 const ModalContext = createContext();
 
 export default function Modal({ children }) {
-  const [open, toggle] = useState(false);
+  const [validateName, setValidateName] = useState('');
 
-  const onCloseModal = () => toggle(!open);
+  const onCloseModal = () => setValidateName('');
 
   return (
-    <ModalContext.Provider value={{ open, onCloseModal }}>
+    <ModalContext.Provider
+      value={{ validateName, setValidateName, onCloseModal }}
+    >
       {children}
     </ModalContext.Provider>
   );
 }
 
-function Toggle({ children }) {
-  const { onCloseModal } = useContext(ModalContext);
+function Toggle({ children, toggleName }) {
+  const { setValidateName } = useContext(ModalContext);
 
-  return (
-    <button
-      onClick={onCloseModal}
-      className="rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-brand-50 shadow-sm transition-all hover:bg-brand-700"
-    >
-      {children}
-    </button>
-  );
+  return cloneElement(children, { onClick: () => setValidateName(toggleName) });
 }
 
-function Window({ children }) {
-  const { open, onCloseModal } = useContext(ModalContext);
+function Window({ children, windowName }) {
+  const { validateName, onCloseModal } = useContext(ModalContext);
 
-  if (!open) return null;
+  if (validateName !== windowName) return null;
 
   return createPortal(
-    <div className="fixed inset-0 z-50 bg-backdrop-color/10 backdrop-blur-sm transition-all duration-500">
+    <>
+      <div
+        onClick={onCloseModal}
+        className="fixed inset-0 z-40 bg-backdrop-color/10 backdrop-blur-sm transition-all duration-500"
+      />
       <div className="fixed left-1/2 top-1/2 z-50 w-2/4 -translate-x-1/2 -translate-y-1/2 rounded-md bg-gray-0 p-10 shadow-2xl transition-all duration-500">
         <button
           onClick={onCloseModal}
@@ -46,7 +45,7 @@ function Window({ children }) {
 
         <div>{cloneElement(children, { onCloseModal })}</div>
       </div>
-    </div>,
+    </>,
     document.body,
   );
 }
