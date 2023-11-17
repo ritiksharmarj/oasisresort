@@ -88,8 +88,10 @@
 
   input[type='text'],
   input[type='number'],
+  input[type='email'],
+  input[type='password'],
   textarea {
-    @apply block w-full rounded-md border-0 py-2 text-sm leading-6 shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600;
+    @apply block w-full rounded-md border-0 py-2 text-sm shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600;
   }
 
   input[type='file'] {
