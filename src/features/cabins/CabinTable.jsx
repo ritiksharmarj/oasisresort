@@ -1,6 +1,6 @@
 import { useCabins } from './hooks/useCabins';
 
-import { Spinner } from '../../ui/Spinner';
+import Spinner from '../../ui/Spinner';
 import CabinRow from './CabinRow';
 
 function CabinTable() {

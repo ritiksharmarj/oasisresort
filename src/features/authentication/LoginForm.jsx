@@ -1,15 +1,22 @@
 import { useForm } from 'react-hook-form';
-import { login } from '../../services/apiAuth';
+import { useLogin } from './hooks/useLogin';
 
 function LoginForm() {
+  const { login, isLoading } = useLogin();
+
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors },
   } = useForm();
 
   function onSubmit(data) {
-    login(data);
+    login(data, {
+      onSettled: () => {
+        reset();
+      },
+    });
   }
 
   return (
@@ -62,6 +69,7 @@ function LoginForm() {
         <div>
           <button
             type="submit"
+            disabled={isLoading}
             className="flex w-full items-center justify-center rounded-md bg-brand-600 px-3 py-2 text-sm font-medium text-brand-50 shadow-sm transition-all hover:bg-brand-700 disabled:bg-brand-200"
           >
             Log in

@@ -1,4 +1,4 @@
-export function Spinner({ className }) {
+export default function Spinner({ className }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

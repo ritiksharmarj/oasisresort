@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { useSettings } from './hooks/useSettings';
 import { useUpdateSetting } from './hooks/useUpdateSetting';
-import { Spinner } from '../../ui/Spinner';
+import Spinner from '../../ui/Spinner';
 
 function UpdateSettingsForm() {
   const [btnDisable, setBtnDisable] = useState(true);
