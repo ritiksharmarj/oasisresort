@@ -18,7 +18,8 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.47.0",
     "react-hot-toast": "^2.4.1",
-    "react-router-dom": "^6.17.0"
+    "react-router-dom": "^6.17.0",
+    "tailwind-merge": "^2.0.0"
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",

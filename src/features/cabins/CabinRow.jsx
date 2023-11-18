@@ -5,6 +5,7 @@ import { formatCurrency } from '../../utils/helpers';
 import CreateCabinForm from './CreateCabinForm';
 import Modal from '../../ui/Modal';
 import ConfirmDelete from '../../ui/ConfirmDelete';
+import Table from '../../ui/Table';
 
 function CabinRow({ cabin }) {
   const { deleteCabin, isDeleting } = useDeleteCabin();
@@ -32,32 +33,32 @@ function CabinRow({ cabin }) {
   }
 
   return (
-    <tr>
-      <td className="whitespace-nowrap px-6 py-2">
+    <Table.Row>
+      <Table.Cell>
         <img
           src={cabinImage}
           alt={`Cabin ${cabinName}`}
           className="h-16 w-28 rounded-md object-cover"
         />
-      </td>
-      <td className="whitespace-nowrap px-6 py-2 font-semibold">
+      </Table.Cell>
+      <Table.Cell className="font-semibold">
         <span>{cabinName}</span>
-      </td>
-      <td className="whitespace-nowrap px-6 py-2">
+      </Table.Cell>
+      <Table.Cell className="whitespace-nowrap px-6 py-2">
         <span>Fits up to {maxCapacity} guests</span>
-      </td>
-      <td className="whitespace-nowrap px-6 py-2 font-semibold">
+      </Table.Cell>
+      <Table.Cell className="font-semibold">
         <span>{formatCurrency(regularPrice)}</span>
-      </td>
-      <td className="whitespace-nowrap px-6 py-2">
+      </Table.Cell>
+      <Table.Cell className="whitespace-nowrap px-6 py-2">
         {discount ? (
           <span className="text-green-700">{formatCurrency(discount)}</span>
         ) : (
           <span>&mdash;</span>
         )}
-      </td>
+      </Table.Cell>
 
-      <td>
+      <Table.Cell>
         <button onClick={handleDuplicate} disabled={isCreating}>
           <Copy size={20} alt="Duplicate this cabin" />
         </button>
@@ -89,8 +90,8 @@ function CabinRow({ cabin }) {
             />
           </Modal.Window>
         </Modal>
-      </td>
-    </tr>
+      </Table.Cell>
+    </Table.Row>
   );
 }
 
