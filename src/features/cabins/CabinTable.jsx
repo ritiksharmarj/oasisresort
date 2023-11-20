@@ -1,8 +1,8 @@
 import { useCabins } from './hooks/useCabins';
 
-import Spinner from '../../ui/Spinner';
+import Spinner from '../../components/ui/Spinner';
 import CabinRow from './CabinRow';
-import Table from '../../ui/Table';
+import Table from '../../components/ui/Table';
 
 function CabinTable() {
   const { cabins, isLoading } = useCabins();

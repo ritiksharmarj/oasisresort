@@ -11,8 +11,8 @@ import Settings from './pages/Settings';
 import Account from './pages/Account';
 import Login from './pages/Login';
 import PageNotFound from './pages/PageNotFound';
-import AppLayout from './ui/AppLayout';
-import ProtectedRoute from './ui/ProtectedRoute';
+import AppLayout from './components/AppLayout';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // React Query: Create a client
 const queryClient = new QueryClient({

@@ -8,10 +8,10 @@ import { useDeleteCabin } from './hooks/useDeleteCabin';
 import { useCreateCabin } from './hooks/useCreateCabin';
 import { formatCurrency } from '../../utils/helpers';
 import CreateCabinForm from './CreateCabinForm';
-import Modal from '../../ui/Modal';
-import ConfirmDelete from '../../ui/ConfirmDelete';
-import Table from '../../ui/Table';
-import DropdownMenu from '../../ui/DropdownMenu';
+import Modal from '../../components/ui/Modal';
+import ConfirmDelete from '../../components/ui/ConfirmDelete';
+import Table from '../../components/ui/Table';
+import DropdownMenu from '../../components/ui/DropdownMenu';
 
 function CabinRow({ cabin }) {
   const { deleteCabin, isDeleting } = useDeleteCabin();
@@ -67,38 +67,6 @@ function CabinRow({ cabin }) {
           <span>&mdash;</span>
         )}
       </Table.Cell>
-
-      {/* <Table.Cell>
-        <button onClick={handleDuplicate} disabled={isCreating}>
-          <Copy size={20} alt="Duplicate this cabin" />
-        </button>
-
-        <Modal>
-          <Modal.Toggle toggleName="edit-cabin">
-            <button>
-              <PencilLine size={20} alt="Edit this cabin" />
-            </button>
-          </Modal.Toggle>
-          <Modal.Window windowName="edit-cabin">
-            <CreateCabinForm editCabinProps={cabin} />
-          </Modal.Window>
-        </Modal>
-
-        <Modal>
-          <Modal.Toggle toggleName="delete-cabin">
-            <button>
-              <Trash size={20} alt="Delete this cabin" />
-            </button>
-          </Modal.Toggle>
-          <Modal.Window windowName="delete-cabin">
-            <ConfirmDelete
-              resourceName="cabin"
-              disabled={isDeleting}
-              onConfirm={() => deleteCabin(cabinId)}
-            />
-          </Modal.Window>
-        </Modal>
-      </Table.Cell> */}
 
       <Table.Cell>
         <DropdownMenu>

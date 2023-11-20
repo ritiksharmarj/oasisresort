@@ -1,5 +1,5 @@
 import { Plus } from '@phosphor-icons/react';
-import Modal from '../../../ui/Modal';
+import Modal from '../../../components/ui/Modal';
 import CreateCabinForm from '../CreateCabinForm';
 
 function AddCabin() {
