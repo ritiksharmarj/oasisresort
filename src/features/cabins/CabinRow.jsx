@@ -109,34 +109,25 @@ function CabinRow({ cabin }) {
 
             <DropdownMenu.Content windowName={cabinId}>
               {/* Duplicate cabin */}
-              <DropdownMenu.Item>
-                <button
-                  onClick={handleDuplicate}
-                  disabled={isCreating}
-                  className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-all hover:bg-gray-100"
-                >
-                  <Copy size={20} />
-                  <span>Duplicate</span>
-                </button>
+              <DropdownMenu.Item
+                icon={<Copy size={20} />}
+                onClick={handleDuplicate}
+                disabled={isCreating}
+              >
+                Duplicate
               </DropdownMenu.Item>
 
               {/* Edit cabin */}
               <Modal.Toggle toggleName="edit-cabin">
-                <DropdownMenu.Item>
-                  <button className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-all hover:bg-gray-100">
-                    <PencilLine size={20} />
-                    <span>Edit</span>
-                  </button>
+                <DropdownMenu.Item icon={<PencilLine size={20} />}>
+                  Edit
                 </DropdownMenu.Item>
               </Modal.Toggle>
 
               {/* Delete cabin */}
               <Modal.Toggle toggleName="delete-cabin">
-                <DropdownMenu.Item>
-                  <button className="flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-all hover:bg-gray-100">
-                    <Trash size={20} />
-                    <span>Delete</span>
-                  </button>
+                <DropdownMenu.Item icon={<Trash size={20} />}>
+                  Delete
                 </DropdownMenu.Item>
               </Modal.Toggle>
             </DropdownMenu.Content>

@@ -67,7 +67,7 @@ function Content({ children, windowName }) {
         className="fixed inset-0 z-40 opacity-0 transition-all duration-500"
       />
       <div
-        className={`fixed z-50 mt-2 overflow-hidden rounded-lg border border-gray-200 bg-gray-0 p-1 shadow-md transition-all duration-500`}
+        className="fixed z-50 mt-2 overflow-hidden rounded-lg border border-gray-200 bg-gray-0 p-1 shadow-md transition-all duration-500"
         style={{ right: `${position.x}px`, top: `${position.y}px` }}
       >
         {children}
@@ -77,8 +77,27 @@ function Content({ children, windowName }) {
   );
 }
 
-function Item({ children }) {
-  return children;
+function Item({ children, className = '', icon, onClick, disabled }) {
+  const { onCloseDropdownMenu } = useContext(DropdownMenuContext);
+
+  function handleClick() {
+    onClick?.();
+    onCloseDropdownMenu();
+  }
+
+  return (
+    <button
+      onClick={handleClick}
+      disabled={disabled}
+      className={twMerge(
+        'flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-all hover:bg-gray-100',
+        className,
+      )}
+    >
+      {icon}
+      <span>{children}</span>
+    </button>
+  );
 }
 
 DropdownMenu.Toggle = Toggle;
