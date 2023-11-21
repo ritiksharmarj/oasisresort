@@ -11,6 +11,9 @@ function CabinTable() {
 
   if (isLoading) return <Spinner className="mx-auto h-6 w-6" />;
 
+  // If there is no cabins data to show
+  if (!cabins.length) return <div>No data to show at the moment.</div>;
+
   // FILTER
   // Get the "discount" parameter value from the URL
   const filterValue = searchParams.get('discount') || 'all';
