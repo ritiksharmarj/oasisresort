@@ -1,4 +1,5 @@
 import BookingTable from '../features/bookings/BookingTable';
+import BookingTableOperations from '../features/bookings/BookingTableOperations';
 
 function Bookings() {
   return (
@@ -6,7 +7,7 @@ function Bookings() {
       <div className="mb-10 flex items-center justify-between">
         <span className="text-3xl font-semibold">All bookings</span>
 
-        <div className="flex items-center gap-2">{/* operations */}</div>
+        <BookingTableOperations />
       </div>
 
       <BookingTable />

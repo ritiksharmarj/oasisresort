@@ -6,12 +6,9 @@ import Badge from '../../components/ui/Badge';
 
 function BookingRow({ booking }) {
   const {
-    id: bookingId,
-    created_at,
     startDate,
     endDate,
     numNights,
-    numGuests,
     totalPrice,
     status,
     cabins: { cabinName },
