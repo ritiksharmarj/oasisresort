@@ -28,7 +28,7 @@ function Filter({ searchParameterName, options }) {
           onClick={() => handleClick(option.value)}
           data-state={option.value === currentFilter ? 'active' : 'inactive'}
           disabled={option.value === currentFilter}
-          className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium text-gray-500 transition-all hover:text-gray-700 data-[state=active]:bg-gray-200 data-[state=active]:text-gray-700 data-[state=active]:shadow-none"
+          className="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 text-sm font-medium text-gray-500 transition-all hover:text-gray-700 disabled:pointer-events-none data-[state=active]:bg-gray-200 data-[state=active]:text-gray-700 data-[state=active]:shadow-none"
         >
           {option.label}
         </button>
