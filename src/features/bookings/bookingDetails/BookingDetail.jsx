@@ -1,13 +1,15 @@
-import { ArrowLeft } from '@phosphor-icons/react';
+import { useNavigate } from 'react-router-dom';
 import { useMoveBack } from '../../../hooks/useMoveBack';
 import { useBookingDetail } from '../hooks/useBookingDetail';
 import Spinner from '../../../components/ui/Spinner';
 import Badge from '../../../components/ui/Badge';
 import BookingDataBox from './BookingDataBox';
+import { ArrowLeft } from '@phosphor-icons/react';
 
 function BookingDetail() {
   const { booking, isLoading } = useBookingDetail();
   const moveBack = useMoveBack();
+  const navigate = useNavigate();
 
   if (isLoading) return <Spinner className="mx-auto h-6 w-6" />;
 
@@ -42,6 +44,21 @@ function BookingDetail() {
       </div>
 
       <BookingDataBox booking={booking} />
+
+      <div className="mt-10 flex items-center justify-end gap-2">
+        {status === 'unconfirmed' && (
+          <button
+            onClick={() => navigate(`/checkin/${bookingId}`)}
+            className="inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md border border-gray-300 px-3 text-sm font-medium transition-colors hover:bg-gray-200"
+          >
+            Check in
+          </button>
+        )}
+
+        <button className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-red-100 shadow-sm transition-all hover:bg-red-700 disabled:bg-red-200">
+          Delete booking
+        </button>
+      </div>
     </>
   );
 }

@@ -1,7 +1,12 @@
 import { format, isToday, parseISO } from 'date-fns';
 import Table from '../../components/ui/Table';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
-import { ArrowRight, DotsThreeOutline, Eye } from '@phosphor-icons/react';
+import {
+  ArrowRight,
+  DotsThreeOutline,
+  DownloadSimple,
+  Eye,
+} from '@phosphor-icons/react';
 import Badge from '../../components/ui/Badge';
 import DropdownMenu from '../../components/ui/DropdownMenu';
 import Modal from '../../components/ui/Modal';
@@ -75,6 +80,16 @@ function BookingRow({ booking }) {
               >
                 See details
               </DropdownMenu.Item>
+
+              {/* Check in */}
+              {status === 'unconfirmed' && (
+                <DropdownMenu.Item
+                  icon={<DownloadSimple size={20} />}
+                  onClick={() => navigate(`/checkin/${bookingId}`)}
+                >
+                  Check in
+                </DropdownMenu.Item>
+              )}
             </DropdownMenu.Content>
           </Modal>
         </DropdownMenu>
