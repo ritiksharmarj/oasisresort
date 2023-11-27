@@ -3,6 +3,7 @@ import { useMoveBack } from '../../../hooks/useMoveBack';
 import { useBookingDetail } from '../hooks/useBookingDetail';
 import Spinner from '../../../components/ui/Spinner';
 import Badge from '../../../components/ui/Badge';
+import BookingDataBox from './BookingDataBox';
 
 function BookingDetail() {
   const { booking, isLoading } = useBookingDetail();
@@ -39,6 +40,8 @@ function BookingDetail() {
           <span>Back</span>
         </button>
       </div>
+
+      <BookingDataBox />
     </>
   );
 }
