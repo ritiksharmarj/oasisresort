@@ -41,7 +41,7 @@ function BookingDetail() {
         </button>
       </div>
 
-      <BookingDataBox />
+      <BookingDataBox booking={booking} />
     </>
   );
 }
