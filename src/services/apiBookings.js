@@ -1,6 +1,10 @@
 import supabase from './supabase';
 import { PAGE_SIZE } from '../utils/constants';
 
+/**
+ * Read all the bookings rows
+ * Filter, sort and pagination
+ */
 export async function getBookings({ filter, sortBy, page }) {
   let query = supabase
     .from('bookings')
@@ -36,4 +40,21 @@ export async function getBookings({ filter, sortBy, page }) {
   }
 
   return { data, count };
+}
+
+/**
+ * Read single booking row for specific column "id"
+ */
+export async function getBookingDetail(id) {
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('*, cabins(*), guests(*)')
+    .eq('id', id)
+    .single();
+
+  if (error) {
+    throw new Error('We are unable to find booking at this time.');
+  }
+
+  return data;
 }

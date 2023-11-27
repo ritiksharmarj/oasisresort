@@ -1,11 +1,17 @@
 import { format, isToday, parseISO } from 'date-fns';
 import Table from '../../components/ui/Table';
 import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
-import { ArrowRight } from '@phosphor-icons/react';
+import { ArrowRight, DotsThreeOutline, Eye } from '@phosphor-icons/react';
 import Badge from '../../components/ui/Badge';
+import DropdownMenu from '../../components/ui/DropdownMenu';
+import Modal from '../../components/ui/Modal';
+import { useNavigate } from 'react-router-dom';
 
 function BookingRow({ booking }) {
+  const navigate = useNavigate();
+
   const {
+    id: bookingId,
     startDate,
     endDate,
     numNights,
@@ -54,7 +60,25 @@ function BookingRow({ booking }) {
         <span>{formatCurrency(totalPrice)}</span>
       </Table.Cell>
 
-      <Table.Cell></Table.Cell>
+      <Table.Cell>
+        <DropdownMenu>
+          <Modal>
+            <DropdownMenu.Toggle toggleName={bookingId}>
+              <DotsThreeOutline size={20} weight="fill" />
+            </DropdownMenu.Toggle>
+
+            <DropdownMenu.Content windowName={bookingId}>
+              {/* See details */}
+              <DropdownMenu.Item
+                icon={<Eye size={20} />}
+                onClick={() => navigate(`/bookings/${bookingId}`)}
+              >
+                See details
+              </DropdownMenu.Item>
+            </DropdownMenu.Content>
+          </Modal>
+        </DropdownMenu>
+      </Table.Cell>
     </Table.Row>
   );
 }
