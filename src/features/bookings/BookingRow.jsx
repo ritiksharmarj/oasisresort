@@ -6,13 +6,16 @@ import {
   DotsThreeOutline,
   DownloadSimple,
   Eye,
+  UploadSimple,
 } from '@phosphor-icons/react';
 import Badge from '../../components/ui/Badge';
 import DropdownMenu from '../../components/ui/DropdownMenu';
 import Modal from '../../components/ui/Modal';
 import { useNavigate } from 'react-router-dom';
+import { useCheckout } from '../checkInOut/hooks/useCheckout';
 
 function BookingRow({ booking }) {
+  const { checkout, isCheckingOut } = useCheckout();
   const navigate = useNavigate();
 
   const {
@@ -88,6 +91,17 @@ function BookingRow({ booking }) {
                   onClick={() => navigate(`/checkin/${bookingId}`)}
                 >
                   Check in
+                </DropdownMenu.Item>
+              )}
+
+              {/* Check out */}
+              {status === 'checked-in' && (
+                <DropdownMenu.Item
+                  icon={<UploadSimple size={20} />}
+                  onClick={() => checkout(bookingId)}
+                  disabled={isCheckingOut}
+                >
+                  Check out
                 </DropdownMenu.Item>
               )}
             </DropdownMenu.Content>
