@@ -17,6 +17,10 @@ function Filter({ searchParameterName, options }) {
 
   function handleClick(value) {
     searchParams.set(searchParameterName, value);
+
+    // Set page = 1 to work filter correctly
+    if (searchParams.get('page')) searchParams.set('page', 1);
+
     setSearchParams(searchParams);
   }
 

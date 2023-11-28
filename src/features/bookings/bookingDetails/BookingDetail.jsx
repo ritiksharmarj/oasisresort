@@ -5,9 +5,11 @@ import Spinner from '../../../components/ui/Spinner';
 import Badge from '../../../components/ui/Badge';
 import BookingDataBox from './BookingDataBox';
 import { ArrowLeft } from '@phosphor-icons/react';
+import { useCheckout } from '../../checkInOut/hooks/useCheckout';
 
 function BookingDetail() {
   const { booking, isLoading } = useBookingDetail();
+  const { checkout, isCheckingOut } = useCheckout();
   const moveBack = useMoveBack();
   const navigate = useNavigate();
 
@@ -52,6 +54,16 @@ function BookingDetail() {
             className="inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md border border-gray-300 px-3 text-sm font-medium transition-colors hover:bg-gray-200"
           >
             Check in
+          </button>
+        )}
+
+        {status === 'checked-in' && (
+          <button
+            onClick={() => checkout(bookingId)}
+            disabled={isCheckingOut}
+            className="inline-flex h-9 items-center justify-center whitespace-nowrap rounded-md border border-gray-300 px-3 text-sm font-medium transition-colors hover:bg-gray-200 disabled:cursor-not-allowed disabled:opacity-50"
+          >
+            Check out
           </button>
         )}
 
