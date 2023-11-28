@@ -43,7 +43,7 @@ function BookingDataBox({ booking }) {
         </span>
       </div>
 
-      <div className="flex flex-col rounded-md rounded-t-none border border-t-0 border-gray-300">
+      <div className="flex flex-col rounded-md rounded-t-none border border-t-0 border-gray-200">
         <div className="flex flex-col px-10 pb-3 pt-8">
           <div className="mb-6 flex items-center gap-4 text-gray-500">
             <span className="flex items-center gap-2 font-medium text-gray-700">

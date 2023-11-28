@@ -14,6 +14,7 @@ import PageNotFound from './pages/PageNotFound';
 import AppLayout from './components/AppLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import BookingDetails from './pages/BookingDetails';
+import BookingCheckin from './pages/BookingCheckin';
 
 // React Query: Create a client
 const queryClient = new QueryClient({
@@ -41,6 +42,7 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/bookings" element={<Bookings />} />
             <Route path="/bookings/:bookingId" element={<BookingDetails />} />
+            <Route path="/checkin/:bookingId" element={<BookingCheckin />} />
             <Route path="/cabins" element={<Cabins />} />
             <Route path="/users" element={<Users />} />
             <Route path="/settings" element={<Settings />} />

@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 export default function Table({ children }) {
   return (
     <div className="relative overflow-x-auto">
-      <div className="min-w-full overflow-hidden rounded-md border border-gray-300 shadow-sm">
+      <div className="min-w-full overflow-hidden rounded-md border border-gray-200 shadow-sm">
         <table className="min-w-full divide-y divide-gray-200 bg-gray-0 text-left text-sm font-medium">
           {children}
         </table>

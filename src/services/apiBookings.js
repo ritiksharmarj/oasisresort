@@ -43,7 +43,9 @@ export async function getBookings({ filter, sortBy, page }) {
 }
 
 /**
- * Read single booking row for specific column "id"
+ * Read single booking row
+ * @param {number} id booking id
+ * @returns {object} booking row
  */
 export async function getBookingDetail(id) {
   const { data, error } = await supabase
@@ -54,6 +56,27 @@ export async function getBookingDetail(id) {
 
   if (error) {
     throw new Error('We are unable to find booking at this time.');
+  }
+
+  return data;
+}
+
+/**
+ * Update booking
+ * @param {number} id booking id
+ * @param {object} dataObj booking checkin data object
+ * @returns {object} updated booking row
+ */
+export async function updateBooking(id, dataObj) {
+  const { data, error } = await supabase
+    .from('bookings')
+    .update(dataObj)
+    .eq('id', id)
+    .select()
+    .single();
+
+  if (error) {
+    throw new Error('We are unable to update booking at this time.');
   }
 
   return data;
