@@ -1,21 +1,26 @@
+import { useNavigate } from 'react-router-dom';
 import { format, isToday, parseISO } from 'date-fns';
-import Table from '../../components/ui/Table';
-import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 import {
   ArrowRight,
   DotsThreeOutline,
   DownloadSimple,
   Eye,
+  Trash,
   UploadSimple,
 } from '@phosphor-icons/react';
+import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
+import Table from '../../components/ui/Table';
 import Badge from '../../components/ui/Badge';
 import DropdownMenu from '../../components/ui/DropdownMenu';
 import Modal from '../../components/ui/Modal';
-import { useNavigate } from 'react-router-dom';
 import { useCheckout } from '../checkInOut/hooks/useCheckout';
+import ConfirmDelete from '../../components/ui/ConfirmDelete';
+import { useDeleteBooking } from './hooks/useDeleteBooking';
 
 function BookingRow({ booking }) {
   const { checkout, isCheckingOut } = useCheckout();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
+
   const navigate = useNavigate();
 
   const {
@@ -104,7 +109,22 @@ function BookingRow({ booking }) {
                   Check out
                 </DropdownMenu.Item>
               )}
+
+              {/* Delete booking */}
+              <Modal.Toggle toggleName="delete-booking">
+                <DropdownMenu.Item icon={<Trash size={20} />}>
+                  Delete booking
+                </DropdownMenu.Item>
+              </Modal.Toggle>
             </DropdownMenu.Content>
+
+            <Modal.Window windowName="delete-booking">
+              <ConfirmDelete
+                resourceName="booking"
+                disabled={isDeleting}
+                onConfirm={() => deleteBooking(bookingId)}
+              />
+            </Modal.Window>
           </Modal>
         </DropdownMenu>
       </Table.Cell>

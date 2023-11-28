@@ -81,3 +81,15 @@ export async function updateBooking(id, dataObj) {
 
   return data;
 }
+
+/**
+ * Delete booking
+ * @param {number} id booking id
+ */
+export async function deleteBooking(id) {
+  const { error } = await supabase.from('bookings').delete().eq('id', id);
+
+  if (error) {
+    throw new Error('We are unable to delete booking at this time.');
+  }
+}

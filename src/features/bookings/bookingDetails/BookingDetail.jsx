@@ -6,10 +6,15 @@ import Badge from '../../../components/ui/Badge';
 import BookingDataBox from './BookingDataBox';
 import { ArrowLeft } from '@phosphor-icons/react';
 import { useCheckout } from '../../checkInOut/hooks/useCheckout';
+import Modal from '../../../components/ui/Modal';
+import ConfirmDelete from '../../../components/ui/ConfirmDelete';
+import { useDeleteBooking } from '../hooks/useDeleteBooking';
 
 function BookingDetail() {
   const { booking, isLoading } = useBookingDetail();
   const { checkout, isCheckingOut } = useCheckout();
+  const { deleteBooking, isDeleting } = useDeleteBooking();
+
   const moveBack = useMoveBack();
   const navigate = useNavigate();
 
@@ -67,9 +72,21 @@ function BookingDetail() {
           </button>
         )}
 
-        <button className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-red-100 shadow-sm transition-all hover:bg-red-700 disabled:bg-red-200">
-          Delete booking
-        </button>
+        <Modal>
+          <Modal.Toggle toggleName="delete-booking">
+            <button className="rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-red-100 shadow-sm transition-all hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-red-200">
+              Delete booking
+            </button>
+          </Modal.Toggle>
+
+          <Modal.Window windowName="delete-booking">
+            <ConfirmDelete
+              resourceName="booking"
+              disabled={isDeleting}
+              onConfirm={() => deleteBooking(bookingId)}
+            />
+          </Modal.Window>
+        </Modal>
       </div>
     </>
   );
