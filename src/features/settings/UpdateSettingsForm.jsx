@@ -48,7 +48,7 @@ function UpdateSettingsForm() {
   if (isLoading) return <Spinner className="mx-auto h-6 w-6" />;
 
   return (
-    <div className="rounded-md border border-gray-300 bg-gray-0 p-6 shadow-sm">
+    <div className="rounded-md border border-gray-200 bg-gray-0 p-6 shadow-sm">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className={`${isUpdating && 'opacity-50'}`}

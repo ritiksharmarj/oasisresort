@@ -1,6 +1,29 @@
 import supabase from './supabase';
 
 /**
+ * Sign up user
+ * @returns user data
+ */
+export async function signUp({ name, email, password }) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: {
+        name,
+        avatar: '',
+      },
+    },
+  });
+
+  if (error) {
+    throw new Error('We are unable to create user at this time.');
+  }
+
+  return data;
+}
+
+/**
  * Log In With Email/Password
  * @returns user data
  */

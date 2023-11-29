@@ -96,7 +96,7 @@
   }
 
   select {
-    @apply bg-[url('/caret-up-down.svg')] bg-[length:20px];
+    @apply bg-[url('/caret-down.svg')] bg-[length:20px];
   }
 
   input[type='file'] {

@@ -2,11 +2,11 @@ import LoginForm from '../features/authentication/LoginForm';
 
 function Login() {
   return (
-    <div className="grid min-h-full grid-cols-2 bg-gray-50">
+    <div className="grid min-h-full grid-cols-[600px_minmax(440px,_1fr)] bg-gray-50">
       <div className="relative">
         <img
-          src="/auth-screen-image.jpg"
-          alt="Cabin image"
+          src="/pattern.png"
+          alt="Pattern"
           className="h-screen w-full object-cover"
         />
       </div>
