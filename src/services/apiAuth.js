@@ -65,6 +65,10 @@ export async function logout() {
   if (error) throw new Error(error.message);
 }
 
+/**
+ * Update user data
+ * @returns user data
+ */
 export async function updateCurrentUser({ name, avatar, password }) {
   // 1. Update name or password
   let updateData;
