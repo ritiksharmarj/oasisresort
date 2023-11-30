@@ -90,7 +90,7 @@ function Item({ children, className = '', icon, onClick, disabled }) {
       onClick={handleClick}
       disabled={disabled}
       className={twMerge(
-        'flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-all hover:bg-gray-100',
+        'flex w-full items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition-all hover:bg-gray-100 disabled:cursor-not-allowed',
         className,
       )}
     >

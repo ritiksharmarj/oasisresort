@@ -11,7 +11,7 @@ function Logout() {
         disabled={isLoading}
         className="rounded-md p-2 text-brand-600 transition-all hover:bg-gray-100 disabled:cursor-not-allowed"
       >
-        <SignOut size={24} />
+        <SignOut size={20} />
       </button>
     </div>
   );
