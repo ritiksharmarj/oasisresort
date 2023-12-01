@@ -15,6 +15,7 @@ import AppLayout from './components/AppLayout';
 import ProtectedRoute from './components/ProtectedRoute';
 import BookingDetails from './pages/BookingDetails';
 import BookingCheckin from './pages/BookingCheckin';
+import { ThemeContextProvider } from './contexts/ThemeContext';
 
 // React Query: Create a client
 const queryClient = new QueryClient({
@@ -27,48 +28,49 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    // React Query: Provide the client to your App
-    <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <Routes>
-          <Route
-            element={
-              <ProtectedRoute>
-                <AppLayout />
-              </ProtectedRoute>
-            }
-          >
-            <Route index element={<Navigate replace to="/dashboard" />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/bookings" element={<Bookings />} />
-            <Route path="/bookings/:bookingId" element={<BookingDetails />} />
-            <Route path="/checkin/:bookingId" element={<BookingCheckin />} />
-            <Route path="/cabins" element={<Cabins />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/account" element={<Account />} />
-          </Route>
+    <ThemeContextProvider>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate replace to="/dashboard" />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/bookings" element={<Bookings />} />
+              <Route path="/bookings/:bookingId" element={<BookingDetails />} />
+              <Route path="/checkin/:bookingId" element={<BookingCheckin />} />
+              <Route path="/cabins" element={<Cabins />} />
+              <Route path="/users" element={<Users />} />
+              <Route path="/settings" element={<Settings />} />
+              <Route path="/account" element={<Account />} />
+            </Route>
 
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
-      </BrowserRouter>
-      <Toaster
-        toastOptions={{
-          success: {
-            duration: 3000,
-          },
-          error: {
-            duration: 5000,
-          },
-          style: {
-            backgroundColor: 'rgb(var(--color-gray-0))',
-            color: 'rgb(var(--color-gray-700))',
-          },
-        }}
-      />
-      <ReactQueryDevtools initialIsOpen={false} />
-    </QueryClientProvider>
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </BrowserRouter>
+        <Toaster
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 5000,
+            },
+            style: {
+              backgroundColor: 'rgb(var(--color-gray-0))',
+              color: 'rgb(var(--color-gray-700))',
+            },
+          }}
+        />
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </ThemeContextProvider>
   );
 }
 

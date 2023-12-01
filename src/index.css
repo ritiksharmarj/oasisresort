@@ -4,7 +4,6 @@
 
 @layer base {
   :root {
-    /* Indigo */
     --color-brand-50: 238 242 255;
     --color-brand-100: 224 231 255;
     --color-brand-200: 199 210 254;
@@ -14,7 +13,6 @@
     --color-brand-800: 55 48 163;
     --color-brand-900: 49 46 129;
 
-    /* gray */
     --color-gray-0: 255 255 255;
     --color-gray-50: 249 250 251;
     --color-gray-100: 243 244 246;
@@ -47,10 +45,47 @@
     --backdrop-color: 255 255 255;
   }
 
-  /* @media (prefers-color-scheme: dark) {
-    :root {
-    }
-  } */
+  .dark {
+    --color-brand-50: 238 242 255;
+    --color-brand-100: 224 231 255;
+    --color-brand-200: 199 210 254;
+    --color-brand-500: 99 102 241;
+    --color-brand-600: 79 70 229;
+    --color-brand-700: 67 56 202;
+    --color-brand-800: 55 48 163;
+    --color-brand-900: 49 46 129;
+
+    --color-gray-0: 23 32 46;
+    --color-gray-50: 17 24 39;
+    --color-gray-100: 31 41 55;
+    --color-gray-200: 56 66 82;
+    --color-gray-300: 75 85 99;
+    --color-gray-400: 107 114 128;
+    --color-gray-500: 156 163 176;
+    --color-gray-600: 209 213 219;
+    --color-gray-700: 229 231 235;
+    --color-gray-800: 242 243 245;
+    --color-gray-900: 249 250 251;
+
+    --color-blue-100: 7 87 131;
+    --color-blue-700: 225 243 254;
+    --color-green-100: 22 100 52;
+    --color-green-700: 222 252 233;
+    --color-yellow-100: 134 78 14;
+    --color-yellow-700: 254 249 195;
+    --color-silver-100: 56 66 82;
+    --color-silver-700: 243 244 246;
+    --color-indigo-100: 54 46 163;
+    --color-indigo-700: 224 232 255;
+
+    --color-red-100: 254 226 226;
+    --color-red-200: 254 200 200;
+    --color-red-600: 219 41 41;
+    --color-red-700: 185 28 28;
+    --color-red-800: 153 27 27;
+
+    --backdrop-color: 0 0 0;
+  }
 
   body {
     @apply min-h-screen text-base text-gray-700 transition-all;
@@ -92,11 +127,11 @@
   input[type='password'],
   textarea,
   select {
-    @apply block w-full rounded-md border-0 py-2 text-sm shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600;
+    @apply block w-full rounded-md border-0 bg-gray-0 py-2 text-sm shadow-sm ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-inset focus:ring-brand-600;
   }
 
   select {
-    @apply bg-[url('/caret-down.svg')] bg-[length:20px];
+    @apply bg-[url('/caret-down-dark.svg')] bg-[length:20px] dark:bg-[url('/caret-down-light.svg')];
   }
 
   input[type='file'] {
