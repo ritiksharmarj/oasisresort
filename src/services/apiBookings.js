@@ -1,5 +1,6 @@
 import supabase from './supabase';
 import { PAGE_SIZE } from '../utils/constants';
+import { getToday } from '../utils/helpers';
 
 /**
  * Read all the bookings rows
@@ -92,4 +93,42 @@ export async function deleteBooking(id) {
   if (error) {
     throw new Error('We are unable to delete booking at this time.');
   }
+}
+
+/**
+ * Returns all bookings created after the given date. Useful to get bookings created in the last 30 days, for example.
+ * @param {Date} date must be in ISO format
+ * @returns bookings data
+ */
+export async function getBookingsAfterDate(date) {
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('created_at, totalPrice, extrasPrice')
+    .gte('created_at', date)
+    .lte('created_at', getToday({ end: true }));
+
+  if (error) {
+    throw new Error('We are unable to load bookings at this time.');
+  }
+
+  return data;
+}
+
+/**
+ * Returns all STAYS (check in) created after the given date
+ * @param {Date} date must be in ISO format
+ * @returns bookings data
+ */
+export async function getStaysAfterDate(date) {
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('*, guests(name)')
+    .gte('startDate', date)
+    .lte('startDate', getToday());
+
+  if (error) {
+    throw new Error('We are unable to load bookings at this time.');
+  }
+
+  return data;
 }

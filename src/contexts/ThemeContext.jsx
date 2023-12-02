@@ -10,8 +10,6 @@ function ThemeContextProvider({ children }) {
     'isDarkMode',
   );
 
-  console.log(isDarkMode);
-
   useEffect(() => {
     if (isDarkMode) {
       document.documentElement.classList.add('dark');
