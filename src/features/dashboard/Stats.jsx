@@ -53,7 +53,7 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
       {allStats.map((stat) => (
         <div
           key={stat.title}
-          className="grid grid-cols-[64px_1fr] grid-rows-[auto_auto] gap-x-4 gap-y-1 rounded-md border border-gray-200 bg-gray-0 p-4 shadow-sm"
+          className="grid grid-cols-[64px_1fr] grid-rows-[auto_auto] items-center gap-x-4 gap-y-1 overflow-hidden rounded-md border border-gray-200 bg-gray-0 p-4 shadow-sm"
         >
           <div
             className="row-span-full flex aspect-square items-center justify-center rounded-full"

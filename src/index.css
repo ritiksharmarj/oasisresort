@@ -155,4 +155,9 @@
   .main-nav__link a.active svg {
     @apply text-brand-600;
   }
+
+  .container--area-chart .recharts-cartesian-grid-horizontal line,
+  .container--area-chart .recharts-cartesian-grid-vertical line {
+    stroke: rgb(var(--color-gray-300));
+  }
 }

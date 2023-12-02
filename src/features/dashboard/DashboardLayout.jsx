@@ -3,6 +3,7 @@ import Spinner from '../../components/ui/Spinner';
 import useRecentStays from './hooks/useRecentStays';
 import Stats from './Stats';
 import { useCabins } from '../cabins/hooks/useCabins';
+import SalesAreaChart from './SalesAreaChart';
 
 function DashboardLayout() {
   const { bookings, isLoading: isLoadingStats } = useRecentBookings();
@@ -24,6 +25,9 @@ function DashboardLayout() {
         numDays={numDays}
         cabinCount={cabins.length}
       />
+      <span>Today Activity</span>
+      <span>Stay Duration Summary</span>
+      <SalesAreaChart bookings={bookings} numDays={numDays} />
     </div>
   );
 }
