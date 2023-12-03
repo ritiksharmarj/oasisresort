@@ -4,6 +4,7 @@ import useRecentStays from './hooks/useRecentStays';
 import Stats from './Stats';
 import { useCabins } from '../cabins/hooks/useCabins';
 import SalesAreaChart from './SalesAreaChart';
+import StayDurationPieChart from './StayDurationPieChart';
 
 function DashboardLayout() {
   const { bookings, isLoading: isLoadingStats } = useRecentBookings();
@@ -26,7 +27,7 @@ function DashboardLayout() {
         cabinCount={cabins.length}
       />
       <span>Today Activity</span>
-      <span>Stay Duration Summary</span>
+      <StayDurationPieChart confirmedStays={confirmedStays} />
       <SalesAreaChart bookings={bookings} numDays={numDays} />
     </div>
   );

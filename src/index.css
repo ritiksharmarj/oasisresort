@@ -160,4 +160,14 @@
   .container--area-chart .recharts-cartesian-grid-vertical line {
     stroke: rgb(var(--color-gray-300));
   }
+
+  .container--pie-chart .recharts-legend-item {
+    @apply mb-1 text-base font-medium;
+    display: flex !important;
+    align-items: center;
+  }
+
+  .container--pie-chart .recharts-legend-item .recharts-surface {
+    margin-right: 8px !important;
+  }
 }
