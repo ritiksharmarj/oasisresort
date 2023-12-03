@@ -8,7 +8,7 @@ function Badge({ children, variant, className = '' }) {
         color: `rgb(var(--color-${variant}-700))`,
       }}
       className={twMerge(
-        'flex items-center justify-center rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase',
+        'inline-flex items-center justify-center rounded-full px-2.5 py-0.5 text-xs font-semibold uppercase',
         className,
       )}
     >
