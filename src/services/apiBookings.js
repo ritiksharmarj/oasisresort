@@ -132,3 +132,25 @@ export async function getStaysAfterDate(date) {
 
   return data;
 }
+
+/**
+ * Combine two conditions using the `.or()` function - match at least one filter
+ * Condition 1: Fetch unconfirmed bookings for today
+ * Condition 2: Fetch checked-in bookings for today
+ * Order the results by the 'created_at' field
+ */
+export async function getStaysTodayActivity() {
+  const { data, error } = await supabase
+    .from('bookings')
+    .select('*, guests(name, nationality, countryFlag)')
+    .or(
+      `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.checked-in,endDate.eq.${getToday()})`,
+    )
+    .order('created_at');
+
+  if (error) {
+    throw new Error('We are unable to load bookings at this time.');
+  }
+
+  return data;
+}

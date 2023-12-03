@@ -137,6 +137,19 @@
   input[type='file'] {
     @apply block w-full text-sm file:mr-4 file:cursor-pointer file:rounded-md file:border-0 file:bg-brand-600 file:px-4 file:py-2 file:text-sm file:font-medium file:text-brand-50 hover:file:bg-brand-700 focus:outline-0;
   }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 16px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    height: 56px;
+    border-radius: 8px;
+    border: 4px solid transparent;
+    background-clip: content-box;
+    background-color: rgb(var(--color-gray-300));
+  }
 }
 
 @layer utilities {
