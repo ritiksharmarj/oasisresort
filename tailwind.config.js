@@ -4,6 +4,9 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   darkMode: 'class',
   theme: {
+    fontFamily: {
+      Sono: ['Sono', 'monospace'],
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
