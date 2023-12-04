@@ -8,6 +8,7 @@ export function useCurrentUser() {
   });
 
   const isAuthenticated = user?.role === 'authenticated';
+  const isAdmin = user?.user_metadata.user_role === 'admin';
 
-  return { isLoading, user, isAuthenticated };
+  return { isLoading, user, isAuthenticated, isAdmin };
 }
