@@ -13,7 +13,6 @@ export function useUpdateSetting() {
       else throw new Error("You don't have permission.");
     },
     onSuccess: () => {
-      console.log('chalja');
       toast.success('Settings successfully updated.');
 
       queryClient.invalidateQueries({
